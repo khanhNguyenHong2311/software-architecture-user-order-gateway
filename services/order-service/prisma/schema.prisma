@@ -1,0 +1,17 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Order {
+  id          String @id @default(uuid())
+  userId      String @map("user_id")
+  totalAmount Float  @map("total_amount")
+  status      String @default("PENDING")
+
+  @@map("orders")
+}
