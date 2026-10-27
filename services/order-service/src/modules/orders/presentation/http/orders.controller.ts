@@ -5,7 +5,6 @@ import {
   Headers,
   HttpCode,
   HttpStatus,
-  Param,
   Post,
   UnauthorizedException,
 } from "@nestjs/common";
@@ -40,11 +39,6 @@ export class OrdersController {
     if (!userId) {
       throw new UnauthorizedException("Missing x-user-id header");
     }
-    return this.listUserOrdersUseCase.execute(userId);
-  }
-
-  @Get("user/:userId")
-  async getOrdersByUserId(@Param("userId") userId: string) {
     return this.listUserOrdersUseCase.execute(userId);
   }
 }

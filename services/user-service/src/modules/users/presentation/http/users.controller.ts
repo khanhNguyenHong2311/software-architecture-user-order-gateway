@@ -8,7 +8,6 @@ import {
   HttpCode,
   HttpStatus,
   NotFoundException,
-  Param,
   Post,
   UnauthorizedException,
 } from "@nestjs/common";
@@ -66,18 +65,6 @@ export class UsersController {
     }
     try {
       return await this.getProfileUseCase.execute(userId);
-    } catch (err) {
-      if (err instanceof UserNotFoundError) {
-        throw new NotFoundException(err.message);
-      }
-      throw err;
-    }
-  }
-
-  @Get(":id")
-  async getUserById(@Param("id") id: string) {
-    try {
-      return await this.getProfileUseCase.execute(id);
     } catch (err) {
       if (err instanceof UserNotFoundError) {
         throw new NotFoundException(err.message);

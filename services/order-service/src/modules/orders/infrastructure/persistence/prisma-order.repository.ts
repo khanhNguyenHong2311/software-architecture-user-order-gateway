@@ -18,17 +18,6 @@ export class PrismaOrderRepository implements OrderRepositoryPort {
     });
   }
 
-  async findById(id: string): Promise<Order | null> {
-    const record = await this.prisma.order.findUnique({ where: { id } });
-    if (!record) return null;
-    return new Order({
-      id: record.id,
-      userId: record.userId,
-      totalAmount: record.totalAmount,
-      status: record.status,
-    });
-  }
-
   async findByUserId(userId: string): Promise<Order[]> {
     const records = await this.prisma.order.findMany({ where: { userId } });
     return records.map(
